@@ -41,9 +41,9 @@ jobs:
           show-on-start: false
           custom-actions: |
             - text: View PR
-              url: "自己設定超連結"
-            - text: View CI
-              url: "自己設定超連結"
+              url: "https://github.com/${{ github.repository }}/pulls"
+            - text: View Release
+              url: "https://github.com/${{ github.repository }}/releases"
       - name: Set up Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
         with:
