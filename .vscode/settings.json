@@ -1,8 +1,9 @@
 {
     "python.linting.pylintEnabled": true,
     "python.linting.enabled": true,
-    "pylint.args": [
+    "python.linting.pylintArgs": [
         "--disable=C0114",
+        "--disable=E0401"
     ],
     "python.formatting.provider": "black",
     "editor.formatOnSave": true,
