@@ -49,13 +49,27 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       
-      - name: Setup PDM
-        uses: pdm-project/setup-pdm@v3
-        with:
-          python-version: ${{ matrix.python-version }}
-          cache: true
-      - name: Run Package Dependencies
-        run: pdm install
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          
+      # - name: Setup PDM
+      #   uses: pdm-project/setup-pdm@v3
+      #   id: setup-pdm
+      #   with:
+      #     python-version: ${{ matrix.python-version }}
+      #     cache: true
+
+      # - name: Check output
+      #   run: |
+      #     echo ${{ steps.setup-pdm.outputs.pdm-bin }}
+      #     echo ${{ steps.setup-pdm.outputs.pdm-version }}
+      #     echo ${{ steps.setup-pdm.outputs.python-path }}
+      #     echo ${{ steps.setup-pdm.outputs.python-version }}
+
+      # - name: Run Package Dependencies
+      #   run: pdm install -v && pdm info
       
       - name: Install software
         run: sudo apt-get install -y chromium-browser
@@ -63,8 +77,8 @@ jobs:
       - name: Test with pytest
         if: always()
         run: |
-          pdm add pytest
-          pdm add allure-pytest
+          pip install pytest
+          pip install allure-pytest
           pytest -vv --alluredir=allure-results 
         continue-on-error: true
 
